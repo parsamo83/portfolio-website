@@ -1,0 +1,464 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  "Steel & Signal"
+  Cool steel neutrals with a slight blue bias, and one signal yellow that carries
+  state and emphasis (the selected pin, the lit output, link underlines). Yellow
+  is never used as text on a light surface: it fails contrast there, so light mode
+  reads `signal-text` instead.
+
+  Rules this system keeps:
+  - Every surface is opaque. Depth comes from tone steps, hairlines and the
+    elevation ladder below, never from blur or translucency.
+  - Text pairs are >= 4.5:1 and control boundaries >= 3:1, in both themes.
+  - One family (Archivo). Hierarchy comes from weight and width, not from a
+    second display face.
+*/
+:root {
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --sunken: #e9ecf0;
+  --muted: #e4e7ec;
+  --line: #d9dde3;
+  --line-strong: #7a8392;
+  --fg: #111418;
+  --fg-muted: #545d6b;
+  --ink: #111418;
+  --on-ink: #ffffff;
+  --signal: #ffd02e;
+  --on-signal: #111418;
+  --signal-text: #7a5c00;
+  --signal-soft: #fff1bf;
+  --success: #1f7a4d;
+  --focus: #111418;
+  --water: #d3dce7;
+
+  /* Elevation ladder: sunken wells, raised cards, floating controls, overlay chrome */
+  --elev-sunken: inset 0 1px 2px rgb(17 20 24 / 0.08);
+  --elev-raised: 0 1px 1px rgb(17 20 24 / 0.04), 0 3px 8px rgb(17 20 24 / 0.06);
+  --elev-floating: 0 1px 2px rgb(17 20 24 / 0.1), 0 6px 16px rgb(17 20 24 / 0.14);
+  --elev-overlay: 0 2px 4px rgb(17 20 24 / 0.06), 0 10px 28px rgb(17 20 24 / 0.14);
+
+  /*
+    Motion. Exits run at about 65% of their entrance so dismissals feel immediate.
+    The spring easings are real damped springs sampled into linear() (see
+    src/lib/spring.ts), so CSS transitions overshoot and settle like the springs
+    in a native app instead of following a guessed cubic-bezier.
+  */
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-select: 220ms;
+  --dur-press: 180ms;
+  --spring-select: cubic-bezier(0.2, 0, 0, 1);
+  --spring-press: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    /* springEasing({ damping: 18, stiffness: 240, mass: 0.9 }) */
+    --dur-select: 604ms;
+    --spring-select: linear(0, 0.042, 0.146, 0.284, 0.435, 0.583, 0.717, 0.831, 0.923, 0.991, 1.039, 1.069, 1.084, 1.088, 1.083, 1.074, 1.061, 1.048, 1.035, 1.024, 1.014, 1.006, 1, 0.996, 0.994, 0.993, 0.992, 0.993, 0.994, 0.995, 0.996, 0.997, 1);
+    /* springEasing({ damping: 20, stiffness: 380, mass: 0.6 }) */
+    --dur-press: 388ms;
+    --spring-press: linear(0, 0.041, 0.141, 0.273, 0.416, 0.556, 0.683, 0.792, 0.881, 0.949, 0.999, 1.032, 1.051, 1.06, 1.062, 1.058, 1.051, 1.043, 1.034, 1.025, 1.018, 1.011, 1.006, 1.002, 0.999, 0.998, 0.997, 0.996, 0.996, 0.996, 0.997, 0.997, 1);
+  }
+}
+
+.dark {
+  --bg: #0e1013;
+  --surface: #16191e;
+  --sunken: #0a0b0e;
+  --muted: #1e2228;
+  --line: #262b33;
+  --line-strong: #6c7584;
+  --fg: #edeff2;
+  --fg-muted: #a2aab6;
+  --ink: #edeff2;
+  --on-ink: #0e1013;
+  --signal: #ffd02e;
+  --on-signal: #111418;
+  --signal-text: #ffd02e;
+  --signal-soft: #3a3010;
+  --success: #5fd39a;
+  --focus: #ffd02e;
+  --water: #18202b;
+
+  --elev-sunken: inset 0 1px 3px rgb(0 0 0 / 0.55);
+  --elev-raised: 0 1px 1px rgb(0 0 0 / 0.35), 0 3px 10px rgb(0 0 0 / 0.35);
+  --elev-floating: 0 1px 3px rgb(0 0 0 / 0.45), 0 8px 20px rgb(0 0 0 / 0.5);
+  --elev-overlay: 0 2px 6px rgb(0 0 0 / 0.45), 0 12px 32px rgb(0 0 0 / 0.55);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-ink: var(--ink);
+  --color-on-ink: var(--on-ink);
+  --color-signal: var(--signal);
+  --color-on-signal: var(--on-signal);
+  --color-signal-text: var(--signal-text);
+  --color-signal-soft: var(--signal-soft);
+  --color-success: var(--success);
+  --color-water: var(--water);
+
+  --shadow-sunken: var(--elev-sunken);
+  --shadow-raised: var(--elev-raised);
+  --shadow-floating: var(--elev-floating);
+  --shadow-overlay: var(--elev-overlay);
+
+  /* Radius by role, not one radius for everything */
+  --radius-badge: 6px;
+  --radius-well: 10px;
+  --radius-control: 12px;
+  --radius-card: 16px;
+  --radius-dock: 18px;
+
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  ::selection {
+    background: var(--signal);
+    color: var(--on-signal);
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  section {
+    scroll-margin-top: 32px;
+  }
+}
+
+@layer components {
+  /* Display type: Archivo at full width and weight */
+  .display {
+    font-stretch: 125%;
+    font-weight: 800;
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+  }
+  .heading {
+    font-stretch: 112%;
+    font-weight: 750;
+    font-size: 1.5625rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  /* Links inside running text: underlined in signal yellow */
+  .link {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: var(--signal);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+  .link:hover {
+    text-decoration-thickness: 3px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 24px;
+    padding: 2px 8px;
+    border-radius: var(--radius-badge);
+    background: var(--muted);
+    color: var(--fg);
+    font-size: 0.78rem;
+    font-weight: 550;
+    line-height: 1.2;
+  }
+
+  /* Buttons press down into their own shadow and spring back */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: var(--radius-control);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      transform var(--dur-press) var(--spring-press),
+      color var(--dur-fast) var(--ease-standard);
+  }
+  .btn svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--on-ink);
+    box-shadow: var(--elev-floating);
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--fg);
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--elev-raised);
+  }
+  @media (hover: hover) {
+    .btn:hover {
+      transform: scale(1.02);
+    }
+  }
+  .btn:active {
+    transform: translateY(1.5px) scale(0.97);
+    transition-duration: var(--dur-fast);
+    transition-timing-function: var(--ease-standard);
+  }
+
+  .bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--fg-muted);
+    font-size: 0.9375rem;
+    max-width: 72ch;
+  }
+  .bullets li {
+    position: relative;
+    padding-left: 16px;
+  }
+  .bullets li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 0.72em;
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+    background: var(--line-strong);
+  }
+
+  /* ---------- Dock ---------- */
+  .dock-pill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-control);
+    background: var(--ink);
+    transform: translateX(calc(var(--i, 0) * 46px));
+    transition:
+      transform var(--dur-select) var(--spring-select),
+      opacity var(--dur-base) var(--ease-standard);
+  }
+  .dock-pill[data-hidden] {
+    opacity: 0;
+  }
+  .dock-item {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-control);
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition:
+      color var(--dur-fast) var(--ease-standard),
+      transform var(--dur-press) var(--spring-press);
+  }
+  .dock-item svg {
+    width: 20px;
+    height: 20px;
+  }
+  .dock-item[aria-current="true"] {
+    color: var(--on-ink);
+  }
+  @media (hover: hover) {
+    .dock-item:not([aria-current="true"]):hover {
+      color: var(--fg);
+      transform: scale(1.06);
+    }
+  }
+  .dock-item:active {
+    transform: translateY(1.5px) scale(0.94);
+    transition-duration: var(--dur-fast);
+  }
+  .dock-item::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 12px);
+    padding: 4px 9px;
+    border-radius: 7px;
+    white-space: nowrap;
+    background: var(--ink);
+    color: var(--on-ink);
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translate(-50%, 4px);
+    pointer-events: none;
+    transition:
+      opacity var(--dur-fast) var(--ease-exit),
+      transform var(--dur-fast) var(--ease-exit);
+  }
+  @media (hover: hover) {
+    .dock-item:hover::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      transition:
+        opacity var(--dur-base) var(--ease-enter),
+        transform var(--dur-base) var(--ease-enter);
+    }
+  }
+  .dock-item:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* ---------- Theme switch (dock) ---------- */
+  .theme-switch {
+    width: 64px;
+  }
+  .theme-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 56px;
+    height: 30px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: var(--muted);
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--elev-sunken);
+  }
+  .dock-item .theme-track-icon {
+    width: 13px;
+    height: 13px;
+    color: var(--fg-muted);
+  }
+  .theme-knob {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--on-ink);
+    box-shadow: var(--elev-raised);
+    transition: transform var(--dur-select) var(--spring-select);
+  }
+  .dock-item .theme-knob svg {
+    width: 14px;
+    height: 14px;
+  }
+  .dark .theme-knob {
+    transform: translateX(26px);
+  }
+
+  /* ---------- Segmented switch (search engine card) ---------- */
+  .seg-thumb {
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    bottom: 3px;
+    width: calc(50% - 3px);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: var(--elev-raised);
+    transform: translateX(calc(var(--seg, 0) * 100%));
+    transition: transform var(--dur-select) var(--spring-select);
+  }
+  .panel {
+    position: absolute;
+    inset: 0;
+    transition:
+      opacity var(--dur-base) var(--ease-enter),
+      transform var(--dur-base) var(--ease-enter);
+  }
+  .panel[data-off] {
+    opacity: 0;
+    transform: translateY(4px);
+    pointer-events: none;
+    transition:
+      opacity var(--dur-fast) var(--ease-exit),
+      transform var(--dur-fast) var(--ease-exit);
+  }
+
+  /* ---------- Language levels ---------- */
+  .cefr span {
+    display: grid;
+    place-items: center;
+    height: 26px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 650;
+    background: var(--sunken);
+    color: var(--fg-muted);
+    box-shadow: var(--elev-sunken);
+  }
+  .cefr span[data-on] {
+    background: var(--ink);
+    color: var(--on-ink);
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .btn:active,
+  .dock-item:active {
+    transform: none;
+  }
+  @media (hover: hover) {
+    .btn:hover,
+    .dock-item:not([aria-current="true"]):hover {
+      transform: none;
+    }
+  }
+}
