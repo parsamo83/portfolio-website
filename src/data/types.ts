@@ -4,7 +4,7 @@
  * missing, misspelled or shaped differently in one of them.
  */
 
-export type ProjectVisual = "loudpin" | "turbinetech" | "raytracer" | "digits" | "search";
+export type ProjectVisual = "loudpin" | "turbinetech" | "habits" | "raytracer" | "digits" | "search";
 
 type Place = { label: string; href?: string };
 
@@ -30,7 +30,6 @@ export type Project = {
   /** Must be the same in both languages: links like #p-loudpin point at it. */
   id: string;
   title: string;
-  dates: string;
   visual: ProjectVisual;
   /** May contain [links](https://...) and **highlights**. */
   description: string;

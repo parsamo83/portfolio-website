@@ -122,7 +122,13 @@ const en: Resume = {
       { name: "React Native, Expo and TypeScript", usedIn: [{ label: "LoudPin", href: "#p-loudpin" }] },
       { name: "MySQL", usedIn: [{ label: "turbinetech.de", href: "#p-turbinetech" }] },
       { name: "Supabase", usedIn: [{ label: "LoudPin", href: "#p-loudpin" }] },
-      { name: "HTML, CSS and JavaScript", usedIn: [{ label: "turbinetech.de", href: "#p-turbinetech" }] },
+      {
+        name: "HTML, CSS and JavaScript",
+        usedIn: [
+          { label: "turbinetech.de", href: "#p-turbinetech" },
+          { label: "Habit tracker", href: "#p-habits" },
+        ],
+      },
       {
         name: "Git and GitHub",
         usedIn: [
@@ -158,7 +164,6 @@ const en: Resume = {
     {
       id: "loudpin",
       title: "LoudPin",
-      dates: "Nov 2025 – now",
       visual: "loudpin",
       feature: true,
       status: { label: "In development", tone: "progress" },
@@ -175,7 +180,6 @@ const en: Resume = {
     {
       id: "turbinetech",
       title: "turbinetech.de",
-      dates: "Apr – Jul 2026",
       visual: "turbinetech",
       status: { label: "Live", tone: "live" },
       description:
@@ -184,9 +188,17 @@ const en: Resume = {
       link: { label: "Visit the site", href: "https://turbinetech.de" },
     },
     {
+      id: "habits",
+      title: "Habit and to-do tracker",
+      visual: "habits",
+      description:
+        "A habit and to-do tracker in a single HTML file, with no dependencies and no accounts. Tasks repeat on the weekdays you choose, and the week, month and year views show your progress. Everything stays in your browser.",
+      tags: ["JavaScript", "HTML", "CSS", "localStorage"],
+      link: { label: "View on GitHub", href: "https://github.com/parsamo83/todo-app" },
+    },
+    {
       id: "raytracer",
       title: "Ray tracer",
-      dates: "University",
       visual: "raytracer",
       description:
         "A C++ program that computes an image from a scene description by following rays of light, built with two classmates. The scene above runs the same idea in your browser: move across it to move the light.",
@@ -195,7 +207,6 @@ const en: Resume = {
     {
       id: "digits",
       title: "Handwritten digit recognition",
-      dates: "University",
       visual: "digits",
       description:
         "A three-layer neural network written in MATLAB without any machine learning library. Our team of five reached **95.2%** accuracy on the MNIST handwritten digits.",
@@ -204,7 +215,6 @@ const en: Resume = {
     {
       id: "search",
       title: "Search engine page",
-      dates: "University",
       visual: "search",
       description:
         "A search site with separate views for web results and images, built as a team on a third-party search engine API. Try the switch above.",
@@ -231,7 +241,7 @@ const en: Resume = {
     certificates: "Certificates",
     languages: "Languages",
     cefrLabel: "{language} at level {level} of the six CEFR levels",
-    projectsIntro: "A live company website, an app in progress and three university projects built in teams.",
+    projectsIntro: "A live company website, an app in progress, a tool of my own and three university projects built in teams.",
     myPart: "My part",
     builtWith: "Built with",
     copy: {
@@ -344,7 +354,13 @@ const de: Resume = {
       { name: "React Native, Expo und TypeScript", usedIn: [{ label: "LoudPin", href: "#p-loudpin" }] },
       { name: "MySQL", usedIn: [{ label: "turbinetech.de", href: "#p-turbinetech" }] },
       { name: "Supabase", usedIn: [{ label: "LoudPin", href: "#p-loudpin" }] },
-      { name: "HTML, CSS und JavaScript", usedIn: [{ label: "turbinetech.de", href: "#p-turbinetech" }] },
+      {
+        name: "HTML, CSS und JavaScript",
+        usedIn: [
+          { label: "turbinetech.de", href: "#p-turbinetech" },
+          { label: "Habit-Tracker", href: "#p-habits" },
+        ],
+      },
       {
         name: "Git und GitHub",
         usedIn: [
@@ -380,7 +396,6 @@ const de: Resume = {
     {
       id: "loudpin",
       title: "LoudPin",
-      dates: "seit 11/2025",
       visual: "loudpin",
       feature: true,
       status: { label: "In Entwicklung", tone: "progress" },
@@ -397,7 +412,6 @@ const de: Resume = {
     {
       id: "turbinetech",
       title: "turbinetech.de",
-      dates: "04–07/2026",
       visual: "turbinetech",
       status: { label: "Live", tone: "live" },
       description:
@@ -406,9 +420,17 @@ const de: Resume = {
       link: { label: "Website ansehen", href: "https://turbinetech.de" },
     },
     {
+      id: "habits",
+      title: "Habit- und To-do-Tracker",
+      visual: "habits",
+      description:
+        "Ein Habit- und To-do-Tracker in einer einzigen HTML-Datei, ohne Abhängigkeiten und ohne Konto. Aufgaben wiederholen sich an den gewählten Wochentagen, und die Ansichten für Woche, Monat und Jahr zeigen den Fortschritt. Alles bleibt im Browser.",
+      tags: ["JavaScript", "HTML", "CSS", "localStorage"],
+      link: { label: "Auf GitHub ansehen", href: "https://github.com/parsamo83/todo-app" },
+    },
+    {
       id: "raytracer",
       title: "Raytracer",
-      dates: "Universität",
       visual: "raytracer",
       description:
         "Ein C++-Programm, das aus einer Szenenbeschreibung ein Bild berechnet, indem es Lichtstrahlen verfolgt. Entstanden im Dreierteam. Die Szene oben nutzt dasselbe Prinzip direkt im Browser: Wenn Sie darüberfahren, wandert das Licht mit.",
@@ -417,7 +439,6 @@ const de: Resume = {
     {
       id: "digits",
       title: "Handschriftliche Ziffernerkennung",
-      dates: "Universität",
       visual: "digits",
       description:
         "Ein dreischichtiges neuronales Netz in MATLAB, ganz ohne Machine-Learning-Bibliotheken. Unser Fünferteam erreichte **95,2 %** Genauigkeit auf den handgeschriebenen MNIST-Ziffern.",
@@ -426,7 +447,6 @@ const de: Resume = {
     {
       id: "search",
       title: "Suchmaschinen-Website",
-      dates: "Universität",
       visual: "search",
       description:
         "Eine Suchseite mit getrennten Ansichten für Web-Ergebnisse und Bilder, im Team auf Basis einer Suchmaschinen-API gebaut. Probieren Sie den Schalter oben aus.",
@@ -453,7 +473,7 @@ const de: Resume = {
     certificates: "Zertifikate",
     languages: "Sprachen",
     cefrLabel: "{language} auf Niveau {level} von sechs GER-Stufen",
-    projectsIntro: "Eine live geschaltete Firmenwebsite, eine App in Entwicklung und drei Universitätsprojekte im Team.",
+    projectsIntro: "Eine live geschaltete Firmenwebsite, eine App in Entwicklung, ein eigenes Tool und drei Universitätsprojekte im Team.",
     myPart: "Mein Anteil",
     builtWith: "Technologien",
     copy: {

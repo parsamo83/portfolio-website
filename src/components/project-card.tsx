@@ -1,6 +1,7 @@
 import { RichText } from "@/components/rich-text";
 import DigitNetwork from "@/components/visuals/digit-network";
-import LoudPinMap from "@/components/visuals/loudpin-map";
+import HabitsScreens from "@/components/visuals/habits-screens";
+import LoudPinScreens from "@/components/visuals/loudpin-screens";
 import RayTracer from "@/components/visuals/ray-tracer";
 import RequestPath from "@/components/visuals/request-path";
 import SearchSwitch from "@/components/visuals/search-switch";
@@ -10,8 +11,9 @@ import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 
 const VISUALS: Record<ProjectVisual, (props: { lang: Lang }) => React.ReactNode> = {
-  loudpin: LoudPinMap,
+  loudpin: LoudPinScreens,
   turbinetech: RequestPath,
+  habits: HabitsScreens,
   raytracer: RayTracer,
   digits: DigitNetwork,
   search: SearchSwitch,
@@ -53,7 +55,6 @@ export function ProjectCard({
               {project.status.label}
             </span>
           )}
-          <span className="ml-auto text-sm whitespace-nowrap text-fg-muted tabular-nums">{project.dates}</span>
         </div>
 
         {project.highlights ? (

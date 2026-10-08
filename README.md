@@ -1,6 +1,6 @@
 # Parsa Motamed: portfolio
 
-My personal site in English and German: experience, skills with the projects that back them up, and project cards with live visuals (a ray tracer that renders in the browser, an MNIST digit, a map from LoudPin).
+My personal site in English and German: experience, skills with the projects that back them up, and project cards with live visuals (a ray tracer that renders in the browser, an MNIST digit, LoudPin on web, tablet and phone).
 
 Built with Next.js 16, React 19, TypeScript and Tailwind CSS v4, hosted on Vercel. The layout started from the open-source [Magic UI portfolio template](https://github.com/dillionverma/portfolio) (MIT, see `LICENSE`); the blog, hackathons section, blur effects and glass dock were removed, and the design was rebuilt.
 
