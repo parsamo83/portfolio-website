@@ -38,7 +38,7 @@ export const PROFILE = {
    * asks for an address where you can be reached. Deploys on Vercel stop with
    * an error while this is empty.
    */
-  address: [] as string[],
+  address: ["Heinrich-Lersch-Straße 36-38", "47057 Duisburg", "Deutschland"] as string[],
 };
 
 const en: Resume = {
